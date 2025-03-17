@@ -704,6 +704,7 @@ section {
   position: relative;
   padding-bottom: 100px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
 .product-card:hover {
@@ -714,6 +715,8 @@ section {
 .product-link {
   display: block;
   padding: 2rem 2rem 0;
+  position: relative;
+  z-index: 1;
 }
 
 .product-image {
@@ -723,11 +726,54 @@ section {
   background: var(--color-white);
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.03);
+  filter: brightness(1.05);
+}
+
+/* 商品画像の光るエフェクト */
+.product-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  z-index: 2;
+  animation: imageShine 5s infinite;
+  pointer-events: none;
+}
+
+@keyframes imageShine {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.3;
+  }
+  35%,
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
 }
 
 .product-info {
   padding: 2rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .product-title {
@@ -1031,6 +1077,20 @@ section {
   background: linear-gradient(135deg, #ffffff 0%, #ffffff 85%, #f8f8f8 100%);
   padding: 3.75rem 0 0;
   border-top: 0.0625rem solid #eee;
+  position: relative;
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23cb0708' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: 0;
 }
 
 .footer-content {
@@ -1041,12 +1101,14 @@ section {
   flex-direction: column;
   gap: 2.5rem;
   position: relative;
+  z-index: 1;
 }
 
 .footer-search {
   width: 100%;
   max-width: 50rem;
   margin: 0 auto;
+  position: relative;
 }
 
 .search-box {
@@ -1062,52 +1124,34 @@ section {
   border-radius: 0.25rem;
   font-size: 1rem;
   width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 15px rgba(203, 7, 8, 0.15);
+  outline: none;
 }
 
 .search-button {
   padding: 1rem 3rem;
-  background: #28b6cf;
+  background: linear-gradient(to right, #28b6cf, #1a9bb3);
   color: #fff;
   border: none;
   border-radius: 0.25rem;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
   white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(40, 182, 207, 0.2);
 }
 
 .search-button:hover {
-  background: #1a9bb3;
-}
-
-@media screen and (max-width: 768px) {
-  .search-box {
-    flex-direction: column;
-    gap: 0.9375rem;
-  }
-
-  .search-input {
-    width: 100%;
-  }
-
-  .search-button {
-    width: 100%;
-  }
-
-  .mogu-logo {
-    height: 4rem; /* モバイル時は64px相当 */
-  }
-
-  .search-input {
-    padding: 0.875rem 1.125rem;
-    font-size: 1rem;
-  }
-
-  .search-button {
-    padding: 0.875rem 1.5rem;
-    font-size: 1rem;
-  }
+  background: linear-gradient(to right, #1a9bb3, #0d8da5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(40, 182, 207, 0.3);
 }
 
 .footer-logo-button-wrapper {
@@ -1121,34 +1165,43 @@ section {
 
 .footer-logo {
   margin: 0;
+  position: relative;
 }
 
 .mogu-logo {
   height: 7.5rem; /* 120px相当 */
   width: auto;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+}
+
+.mogu-logo:hover {
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.15));
+  transform: translateY(-3px);
 }
 
 .footer-top-button {
   display: inline-block;
   padding: 0.75rem 2.5rem;
-  background: #ffb366;
+  background: linear-gradient(to right, #ffb366, #ff9933);
   color: #444;
   text-decoration: none;
   border-radius: 2rem;
   font-weight: bold;
   transition: all 0.3s;
   margin: 0;
+  box-shadow: 0 4px 10px rgba(255, 179, 102, 0.3);
 }
 
 .footer-top-button:hover {
-  background: #ffd5a1;
+  background: linear-gradient(to right, #ffd5a1, #ffb366);
   transform: translateY(-0.1875rem);
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(255, 179, 102, 0.4);
 }
 
 .footer-top-button:active {
   transform: translateY(-0.0625rem);
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px rgba(255, 179, 102, 0.3);
 }
 
 .footer-nav {
@@ -1159,11 +1212,22 @@ section {
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  position: relative;
 }
 
-.footer-logo {
-  margin: 0;
-  text-align: center;
+.footer-nav::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(203, 7, 8, 0),
+    rgba(203, 7, 8, 0.1),
+    rgba(203, 7, 8, 0)
+  );
 }
 
 .footer-links {
@@ -1179,11 +1243,116 @@ section {
   color: #666;
   text-decoration: none;
   font-size: 0.875rem;
-  transition: color 0.3s;
+  transition: all 0.3s;
+  position: relative;
+  padding: 0.3rem 0;
 }
 
 .footer-links a:hover {
-  color: #28b6cf;
+  color: var(--color-primary);
+}
+
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-primary);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.footer-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* ソーシャルメディアアイコン */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: #f5f5f5;
+  color: #666;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.social-icon.twitter {
+  background: linear-gradient(135deg, #f5f5f5, #e1e8ed);
+  color: #1da1f2;
+}
+
+.social-icon.twitter:hover {
+  background: #1da1f2;
+  color: white;
+}
+
+.social-icon.facebook {
+  background: linear-gradient(135deg, #f5f5f5, #e6eaf4);
+  color: #4267b2;
+}
+
+.social-icon.facebook:hover {
+  background: #4267b2;
+  color: white;
+}
+
+.social-icon.instagram {
+  background: linear-gradient(135deg, #f5f5f5, #f3e5f5);
+  color: #c13584;
+}
+
+.social-icon.instagram:hover {
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #5851db,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d
+  );
+  color: white;
+}
+
+.social-icon.line {
+  background: linear-gradient(135deg, #f5f5f5, #e5f7e5);
+  color: #00b900;
+}
+
+.social-icon.line:hover {
+  background: #00b900;
+  color: white;
+}
+
+/* フッターの著作権表示 */
+.copyright {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: #999;
+  font-size: 0.75rem;
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -1223,6 +1392,16 @@ section {
     font-size: 0.875rem;
     margin: 0;
   }
+
+  .social-links {
+    gap: 1rem;
+  }
+
+  .social-icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -1242,6 +1421,16 @@ section {
 
   .footer-links {
     gap: 1.5rem;
+  }
+
+  .social-links {
+    gap: 0.8rem;
+  }
+
+  .social-icon {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -1539,9 +1728,21 @@ section {
 .price-range {
   display: block;
   font-weight: bold;
-  color: #cb0708;
-  font-size: 1.2rem;
+  color: #ff0000;
+  font-size: 3rem;
   margin-top: 0.3rem;
+}
+
+@keyframes pulsatePrice {
+  0%,
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 5px rgba(203, 7, 8, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(203, 7, 8, 0.3);
+  }
 }
 
 /* 1000円ポッキリセクション */
