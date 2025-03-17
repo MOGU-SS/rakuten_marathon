@@ -291,51 +291,40 @@ a {
   opacity: 0.95;
 }
 
+/* カテゴリーボタンのレイアウト - デスクトップは2x2グリッド、モバイルは縦4つ並び */
 .category-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .category-row {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  display: contents;
 }
 
 .category-button {
   background: linear-gradient(to right, #bf0000, #ff3333);
   border-radius: 10px;
   padding: var(--spacing-base) calc(1.5 * var(--spacing-base));
-  min-width: 15.625rem; /* 250px to rem */
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
-}
-
-.category-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(to right, #ffcc00, #ffd700);
-  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .category-text {
   color: var(--color-white);
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.4;
   text-align: left;
   z-index: 1;
@@ -343,16 +332,16 @@ a {
 }
 
 .category-icon {
-  width: 1.875rem; /* 30px to rem */
-  height: 1.875rem; /* 30px to rem */
+  width: 1.5rem;
+  height: 1.5rem;
   object-fit: contain;
   z-index: 1;
-  margin-left: 0.625rem; /* 10px to rem */
+  margin-left: 0.625rem;
 }
 
 .category-button:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   background: linear-gradient(to right, #ff3333, #bf0000);
 }
 
@@ -487,14 +476,17 @@ a {
   }
 
   .category-section.sticky .category-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
     padding: 0 0.5rem;
   }
 
   .category-section.sticky .category-row {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
   }
 
   .category-section.sticky .category-button {
@@ -508,31 +500,26 @@ a {
     background: linear-gradient(to right, #bf0000, #ff3333);
     border-radius: 8px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    justify-content: center;
+    justify-content: space-between;
     height: auto;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .category-section.sticky .category-button:active {
-    transform: scale(0.98);
+    display: flex;
+    align-items: center;
   }
 
   .category-section.sticky .category-text {
     font-size: 0.9rem;
     line-height: 1.3;
-    text-align: center;
+    text-align: left;
     padding: 0;
-    width: 100%;
+    width: auto;
     word-break: keep-all;
     overflow-wrap: break-word;
   }
 
-  .category-section.sticky .category-text br {
-    display: none;
-  }
-
   .category-section.sticky .category-icon {
-    display: none;
+    display: none; /* 矢印アイコンを非表示に変更 */
+    width: 20px;
+    height: auto;
   }
 
   /* フッターとの干渉を防ぐためのスペース確保 */
@@ -572,6 +559,10 @@ a {
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     min-width: auto; /* 幅を内容に合わせる */
     flex: 0 0 auto; /* 幅を固定しない */
+    width: 100%;
+    justify-content: space-between; /* 左右に配置 */
+    display: flex;
+    align-items: center;
   }
 
   .category-button:active {
@@ -1671,65 +1662,76 @@ section {
 
 @media (max-width: 768px) {
   .calendar-countdown {
-    margin: 20px auto;
-    padding: 15px;
+    margin: 1.5rem auto;
+    padding: 0.5rem;
   }
 
   .calendar-title {
     font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .calendar-container {
+    gap: 0.3rem;
+    justify-content: center;
   }
 
   .calendar-page {
-    width: 65px;
-    height: 75px;
+    width: 60px;
+    height: 70px;
+    margin: 0 0.2rem;
+    position: relative;
   }
 
-  .calendar-page span {
-    font-size: 2rem;
+  .calendar-page:before {
+    height: 20px;
+    top: 0;
+    border-radius: 5px 5px 0 0;
   }
 
-  .calendar-label {
-    font-size: 0.9rem;
+  .calendar-number {
+    font-size: 2.2rem;
+    margin-top: 20px;
   }
 
-  .calendar-countdown::after {
-    font-size: 0.7rem;
-    top: 15px;
-    right: -35px;
-    padding: 3px 35px;
+  .calendar-unit {
+    font-size: 0.8rem;
+    margin-top: 0;
   }
 }
 
 @media (max-width: 480px) {
   .calendar-countdown {
-    padding: 10px;
+    margin: 1rem auto;
+    padding: 0.3rem;
+  }
+
+  .calendar-title {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
   }
 
   .calendar-container {
-    gap: 8px;
+    gap: 0.2rem;
   }
 
   .calendar-page {
-    width: 55px;
-    height: 65px;
+    width: 50px;
+    height: 60px;
+    margin: 0 0.1rem;
   }
 
-  .calendar-page span {
+  .calendar-page:before {
+    height: 15px;
+  }
+
+  .calendar-number {
     font-size: 1.8rem;
-    margin-top: 12px;
+    margin-top: 15px;
   }
 
-  .calendar-label {
-    font-size: 0.8rem;
-    margin-top: 5px;
-    padding: 2px 8px;
-  }
-
-  .calendar-countdown::after {
-    font-size: 0.6rem;
-    top: 10px;
-    right: -38px;
-    padding: 2px 30px;
+  .calendar-unit {
+    font-size: 0.7rem;
   }
 }
 
@@ -2033,4 +2035,163 @@ section {
 .touch-device a:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(203, 7, 8, 0.3);
+}
+
+/* カテゴリーボタンのレスポンシブ改善 */
+@media (max-width: 768px) {
+  .category-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0 0.5rem;
+  }
+
+  .category-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
+  }
+
+  .category-button {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    white-space: normal;
+    background: linear-gradient(to right, #bf0000, #ff3333);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    min-width: auto; /* 幅を内容に合わせる */
+    flex: 0 0 auto; /* 幅を固定しない */
+    width: 100%;
+    justify-content: center; /* 中央揃えに変更 */
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #ffcc00, #ffd700);
+    z-index: 1;
+  }
+
+  .category-text {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+    font-size: 1rem;
+    text-align: center; /* 中央揃えに変更 */
+    font-weight: bold;
+    color: var(--color-white);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .category-text br {
+    display: none; /* 改行を非表示に */
+  }
+
+  .category-icon {
+    display: none; /* 矢印アイコンを非表示に変更 */
+    width: 20px;
+    height: auto;
+  }
+
+  .category-section.sticky .category-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0 0.5rem;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .category-section.sticky .category-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .category-section.sticky .category-button {
+    width: 100%;
+    min-width: 0;
+    padding: 0.7rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    white-space: normal;
+    flex: 1 1 auto;
+    background: linear-gradient(to right, #bf0000, #ff3333);
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    justify-content: center; /* 中央揃えに変更 */
+    height: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-section.sticky .category-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, #ffcc00, #ffd700);
+    z-index: 1;
+  }
+
+  .category-section.sticky .category-text {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    text-align: center; /* 中央揃えに変更 */
+    padding: 0;
+    width: auto;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    font-weight: bold;
+    color: var(--color-white);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .category-section.sticky .category-text br {
+    display: none; /* 改行を非表示に */
+  }
+
+  .category-section.sticky .category-icon {
+    display: none; /* 固定表示時も矢印アイコンを非表示に */
+    width: 20px;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .category-text {
+    font-size: 0.85rem;
+  }
+
+  .category-text br {
+    display: inline; /* 改行を表示 */
+  }
+
+  .category-section.sticky .category-button {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .category-section.sticky .category-text br {
+    display: inline; /* 改行を表示 */
+  }
 }
