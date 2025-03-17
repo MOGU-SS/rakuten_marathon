@@ -5,78 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>楽天 お買い物マラソン - MOGUストア</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <style>
-      /* 追加のスタイル */
-      .product-description {
-        white-space: pre-line; /* 改行を保持して表示 */
-        margin-top: 0.5rem;
-        font-size: 0.9rem;
-        line-height: 1.4;
-        color: #333;
-      }
-
-      .no-products {
-        text-align: center;
-        padding: 2rem;
-        color: #666;
-        font-style: italic;
-      }
-
-      .price-range {
-        display: block;
-        font-weight: bold;
-        color: #cb0708;
-        font-size: 1.2rem;
-        margin-top: 0.3rem;
-      }
-    </style>
   </head>
   <body>
     <div class="container">
       <!-- セールヘッダー -->
       <header id="top" class="sale-header">
         <img
-          src="img/marathon/202403/header.jpg"
+          src="img/marathon/202503/sale_header.svg"
           alt="お買い物マラソン"
           class="sale-header-img"
         />
-      </header>
-
-      <!-- カテゴリーセクション -->
-      <section class="category-wrapper">
         <!-- カウントダウン部分 -->
-        <div class="campaign-section">
-          <div class="campaign-info">
-            <div class="campaign-title">店内アイテム ポイント5倍</div>
-            <div class="campaign-period">
-              <div class="period-date">
-                2024年6月21日 20:00 ～ 6月27日 01:59
+        <div class="calendar-countdown">
+          <div class="calendar-title">セール終了まで残り</div>
+          <div class="calendar-container">
+            <div class="calendar-item">
+              <div class="calendar-page">
+                <span id="countdown-days">00</span>
               </div>
-              <div class="countdown">
-                <p class="countdown-title">キャンペーン終了まで残り</p>
-                <div class="countdown-wrap">
-                  <div class="countdown-item">
-                    <span id="countdown-days">00</span>
-                    <span class="countdown-label">日</span>
-                  </div>
-                  <div class="countdown-item">
-                    <span id="countdown-hours">00</span>
-                    <span class="countdown-label">時間</span>
-                  </div>
-                  <div class="countdown-item">
-                    <span id="countdown-minutes">00</span>
-                    <span class="countdown-label">分</span>
-                  </div>
-                  <div class="countdown-item">
-                    <span id="countdown-seconds">00</span>
-                    <span class="countdown-label">秒</span>
-                  </div>
-                </div>
+              <div class="calendar-label">日</div>
+            </div>
+            <div class="calendar-item">
+              <div class="calendar-page">
+                <span id="countdown-hours">00</span>
               </div>
+              <div class="calendar-label">時間</div>
+            </div>
+            <div class="calendar-item">
+              <div class="calendar-page">
+                <span id="countdown-minutes">00</span>
+              </div>
+              <div class="calendar-label">分</div>
+            </div>
+            <div class="calendar-item">
+              <div class="calendar-page">
+                <span id="countdown-seconds">00</span>
+              </div>
+              <div class="calendar-label">秒</div>
             </div>
           </div>
         </div>
+      </header>
 
+      <!-- クーポンセクション -->
+      <section class="coupon-section">
+        <div class="coupon-logo-container">
+          <img
+            src="img/marathon/202503/coupon/coupon_logo.svg"
+            alt="お得にご購入！クーポンGET"
+            class="coupon-logo"
+          />
+        </div>
+        <a
+          href="https://coupon.rakuten.co.jp/getCoupon?getkey=NEpVRy1ZQU5CLU9QVlEtRU1aUg--&rt="
+          target="_blank"
+          rel="noopener noreferrer"
+          class="coupon-link"
+        >
+          <img
+            src="img/marathon/202503/coupon/coupon.svg"
+            alt="お買い物マラソン限定 全品5%OFF！クーポンをGETする"
+            class="coupon-card"
+          />
+        </a>
+      </section>
+
+      <!-- カテゴリーセクション -->
+      <section class="category-wrapper">
         <!-- カテゴリーナビゲーション部分 -->
         <div id="category-section" class="category-section">
           <div class="category-buttons">
@@ -354,15 +349,46 @@
       // カウントダウン機能
       function updateCountdown() {
         const now = new Date();
-        const endDate = new Date("2024-06-27T01:59:59+09:00");
+        const startDate = new Date("2025-03-21T00:00:00+09:00"); // セール開始日時
+        const endDate = new Date("2025-03-27T01:59:59+09:00"); // セール終了日時
 
         // セール終了後
         if (now > endDate) {
-          document.querySelector(".countdown").innerHTML =
-            '<p style="font-size: 1.5rem; color: #666;">キャンペーン終了</p>';
+          document.querySelector(".calendar-countdown").innerHTML =
+            '<p class="campaign-ended">キャンペーン終了</p>';
           return;
         }
 
+        // セール開始前
+        if (now < startDate) {
+          const diff = startDate - now;
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+          // タイトルを「セール開始まで残り」に変更
+          document.querySelector(".calendar-title").textContent =
+            "開始まで残り";
+
+          document.getElementById("countdown-days").textContent = String(
+            days
+          ).padStart(2, "0");
+          document.getElementById("countdown-hours").textContent = String(
+            hours
+          ).padStart(2, "0");
+          document.getElementById("countdown-minutes").textContent = String(
+            minutes
+          ).padStart(2, "0");
+          document.getElementById("countdown-seconds").textContent = String(
+            seconds
+          ).padStart(2, "0");
+          return;
+        }
+
+        // セール中
         const diff = endDate - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
@@ -370,6 +396,9 @@
         );
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        // タイトルを「セール終了まで残り」に変更
+        document.querySelector(".calendar-title").textContent = "終了まで残り";
 
         document.getElementById("countdown-days").textContent = String(
           days

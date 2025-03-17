@@ -71,6 +71,44 @@ a {
   background-color: var(--color-kidnapper);
 }
 
+/* クーポンセクション */
+.coupon-section {
+  margin: 2rem auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.coupon-logo {
+  max-width: 300px;
+  margin: 0 auto 1.5rem;
+}
+
+.coupon-card {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.coupon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .coupon-section {
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+
+  .coupon-logo {
+    max-width: 250px;
+    margin-bottom: 1rem;
+  }
+}
+
 .campaign-section {
   margin-bottom: 2rem;
 }
@@ -1292,4 +1330,128 @@ section {
   .footer-links {
     gap: 1.5rem;
   }
+}
+
+/* カレンダー風カウントダウンのスタイル */
+.calendar-countdown {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.calendar-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.calendar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-page {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  width: 60px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-page:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-color: var(--color-primary);
+  z-index: 0;
+}
+
+.calendar-page span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+}
+
+.calendar-label {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+@media (max-width: 480px) {
+  .calendar-page {
+    width: 50px;
+    height: 60px;
+  }
+
+  .calendar-page span {
+    font-size: 1.5rem;
+  }
+
+  .calendar-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* 商品説明文のスタイル */
+.product-description {
+  white-space: pre-line; /* 改行を保持して表示 */
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #333;
+}
+
+/* 商品なしメッセージのスタイル */
+.no-products {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* 価格範囲のスタイル */
+.price-range {
+  display: block;
+  font-weight: bold;
+  color: #cb0708;
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
+}
+
+/* キャンペーン終了メッセージのスタイル */
+.campaign-ended {
+  font-size: 1.5rem;
+  color: #666;
+  text-align: center;
+}
+.coupon-card {
+  display: block;
+  width: 100%; /* 幅を100%に設定 */
+  max-width: 800px; /* 最大幅を設定 */
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #fff; /* 背景色を白に設定 */
 }
