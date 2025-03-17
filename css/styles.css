@@ -7,7 +7,13 @@
   --color-white: #ffffff;
   --color-gray: #666666;
   --color-background: #c90908;
-  --color-kidnapper: #ddebd3;
+  --color-kidnapper: #ffffff; /* 薄いグリーンから白に変更 */
+
+  /* セクション背景色 */
+  --color-section-1: #fff9f9; /* 非常に薄いピンク */
+  --color-section-2: #f9f9ff; /* 非常に薄い青 */
+  --color-section-3: #fffbf6; /* 非常に薄いオレンジ */
+  --color-section-4: #f6fff9; /* 非常に薄い緑 */
 
   /* フォント */
   --font-family-base: "Inter", "Helvetica Neue", Arial, sans-serif;
@@ -85,11 +91,13 @@ a {
 
 .coupon-card {
   display: block;
-  max-width: 100%;
+  width: 100%; /* 幅を100%に設定 */
+  max-width: 800px; /* 最大幅を設定 */
   margin: 0 auto;
   transition: transform 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  background-color: #fff; /* 背景色を白に設定 */
 }
 
 .coupon-card:hover {
@@ -781,382 +789,132 @@ section {
   }
 }
 
-/* 1000円ポッキリセクション */
-.price-1000 {
-  padding: 2rem 0 5rem;
-  background: var(--color-background);
+/* 送料無料・1000円ポッキリセクション */
+.pockiri-section {
+  background: linear-gradient(135deg, var(--color-section-1) 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-.price-1000 .product-grid {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.price-1000 .product-card {
-  width: 100%;
-  max-width: 519px;
-  margin: 0 auto;
-}
-
-.price-1000 .product-title {
-  font-size: 1.5rem;
-  color: var(--color-black);
-  margin-bottom: 1rem;
-}
-
-.price-1000 .price-current {
-  font-size: 2.5rem;
-  color: var(--color-primary);
-  font-weight: 700;
-  margin: 1rem 0;
-}
-
-.price-1000 .product-description {
-  font-size: 1rem;
-  color: var(--color-black);
-  line-height: 1.6;
-  margin: 1rem 0;
-}
-
-@media (max-width: 768px) {
-  .price-1000 .product-title {
-    font-size: 1.25rem;
-  }
-
-  .price-1000 .price-current {
-    font-size: 2rem;
-  }
-
-  .price-1000 .product-description {
-    font-size: 0.9rem;
-  }
-}
-
-.to-top .arrow {
-  color: #666;
-  font-size: 32px;
-  font-weight: bold;
-  line-height: 0.8;
-  text-align: center;
-  transform: translateY(-4px);
-}
-
-.to-top:hover {
-  opacity: 0.8;
-}
-
-@media (max-width: 768px) {
-  .to-top {
-    right: 15px;
-    bottom: 85px;
-    width: 40px;
-    height: 40px;
-  }
-
-  .to-top .arrow {
-    font-size: 20px;
-    line-height: 0.8;
-    transform: translateY(-2px);
-  }
-}
-
-/* カテゴリナビ */
-.category-nav {
-  position: fixed;
-  bottom: 0;
+.pockiri-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
   left: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  padding: 15px 0;
+  right: 0;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f8d7da' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  z-index: 0;
 }
 
-.category-list {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+/* 人気アイテムセクション */
+.popular-section {
+  background: linear-gradient(to right, var(--color-section-2), #ffffff);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-.category-list::-webkit-scrollbar {
-  display: none;
+.popular-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0d1ff' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 0;
 }
 
-.category-list li {
-  flex: 0 0 auto;
+/* 新商品セクション */
+.new-section {
+  background: radial-gradient(
+    circle at top right,
+    var(--color-section-3),
+    #ffffff 70%
+  );
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-.category-list a {
-  display: block;
-  padding: 12px 30px;
-  color: var(--color-primary);
-  font-weight: bold;
-  font-size: 1.2rem;
-  border-radius: 25px;
-  background: var(--color-white);
-  border: 2px solid var(--color-primary);
-  transition: all 0.3s;
-  white-space: nowrap;
+.new-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffbd70' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  z-index: 0;
 }
 
-.category-list a:hover {
-  background: var(--color-primary);
-  color: var(--color-white);
+/* お買い得品セクション */
+.bargain-section {
+  background: linear-gradient(135deg, #ffffff 0%, var(--color-section-4) 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-@media (max-width: 768px) {
-  .category-nav {
-    padding: 12px 10px;
-  }
-
-  .category-list {
-    gap: 1rem;
-    padding: 0 5px;
-    justify-content: flex-start;
-  }
-
-  .category-list a {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    border-radius: 20px;
-  }
-
-  /* TOPに戻るボタンの位置調整 */
-  .to-top {
-    bottom: 85px;
-  }
+.bargain-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23a3e0c5' fill-opacity='0.1'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0l28-28v2L54 40h-2zm4 0l24-24v2L58 40h-2zm4 0l20-20v2L62 40h-2zm4 0l16-16v2L66 40h-2zm4 0l12-12v2L70 40h-2zm4 0l8-8v2l-6 6h-2zm4 0l4-4v2l-2 2h-2z'/%3E%3C/g%3E%3C/svg%3E");
+  z-index: 0;
 }
 
-@media (max-width: 480px) {
-  .category-list {
-    gap: 1rem;
-  }
-
-  .category-list a {
-    padding: 6px 12px;
-    font-size: 0.9rem;
-  }
+/* セクションコンテンツを相対位置に設定して背景パターンの上に表示 */
+.pockiri-section > *,
+.popular-section > *,
+.new-section > *,
+.bargain-section > * {
+  position: relative;
+  z-index: 1;
 }
 
-/* 商品セクション共通スタイル */
-.sofa-section,
-.sleep-section,
-.office-living-section,
-.gift-section {
-  padding: 2.5rem 1.25rem;
-  background: linear-gradient(135deg, #f0f8ff 25%, transparent 25%) -3.125rem 0,
-    linear-gradient(225deg, #f0f8ff 25%, transparent 25%),
-    linear-gradient(315deg, #f0f8ff 25%, transparent 25%),
-    linear-gradient(45deg, #f0f8ff 25%, transparent 25%);
-  background-size: 6.25rem 6.25rem;
-  background-color: #e6f7ff;
-  box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
+/* 商品カードのスタイル調整 - セクションごとに異なる色合い */
+.pockiri-section .product-card {
+  background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+  border: 1px solid rgba(203, 7, 8, 0.1);
 }
 
-.sofa-section .section-title,
-.sleep-section .section-title,
-.office-living-section .section-title,
-.gift-section .section-title {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-bottom: 1.25rem;
-  color: #333;
-  background: linear-gradient(to right, #28b6cf, #5ad8f0);
-  padding: 0.9375rem;
-  border-radius: 0.5rem;
+.popular-section .product-card {
+  background: linear-gradient(135deg, #f5f5ff 0%, #ffffff 100%);
+  border: 1px solid rgba(40, 182, 207, 0.1);
 }
 
-.sofa-section .section-description,
-.sleep-section .section-description,
-.office-living-section .section-description,
-.gift-section .section-description {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  line-height: 1.8;
-  color: #666;
+.new-section .product-card {
+  background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);
+  border: 1px solid rgba(255, 152, 0, 0.1);
 }
 
-.sofa-grid,
-.sleep-grid,
-.office-grid,
-.gift-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  max-width: 75rem;
-  margin: 0 auto;
-  padding: 0 1.25rem;
-}
-
-.sofa-item,
-.sleep-item,
-.office-item,
-.gift-item {
-  text-align: center;
-  transition: all 0.3s ease;
-  background: #fff5f7;
-  border-radius: 0.75rem;
-  padding: 1.25rem;
-  box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
-}
-
-.sofa-item:hover,
-.sleep-item:hover,
-.office-item:hover,
-.gift-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.sofa-item a,
-.sleep-item a,
-.office-item a,
-.gift-item a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.sofa-item img,
-.sleep-item img,
-.office-item img,
-.gift-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  transition: transform 0.3s ease;
-}
-
-.sofa-item:hover img,
-.sleep-item:hover img,
-.office-item:hover img,
-.gift-item:hover img {
-  transform: scale(1.02);
-}
-
-.sofa-item .product-name,
-.sleep-item .product-name,
-.office-item .product-name,
-.gift-item .product-name {
-  font-size: 16px;
-  color: #333;
-  margin: 0;
-  padding: 0 10px;
-  line-height: 1.4;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.sofa-item .product-name .included,
-.sleep-item .product-name .included,
-.office-item .product-name .included,
-.gift-item .product-name .included {
-  font-size: 14px;
-  color: #666;
-  font-weight: normal;
+.bargain-section .product-card {
+  background: linear-gradient(135deg, #f0fff5 0%, #ffffff 100%);
+  border: 1px solid rgba(76, 175, 80, 0.1);
 }
 
 /* レスポンシブ対応 */
-@media (max-width: 1024px) {
-  .sofa-grid,
-  .sleep-grid,
-  .office-grid,
-  .gift-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
-}
-
 @media (max-width: 768px) {
-  .sofa-grid,
-  .sleep-grid,
-  .office-grid,
-  .gift-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    padding: 0 0.625rem;
-  }
-
-  .sofa-section .section-title,
-  .sleep-section .section-title,
-  .office-living-section .section-title,
-  .gift-section .section-title {
-    font-size: 1.1rem;
-    padding: 0.8rem 1rem;
-    margin: 1.5rem 0 1rem;
-    line-height: 1.4;
-    display: inline-block;
-    width: 100%;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-
-  .sofa-section .section-description,
-  .sleep-section .section-description,
-  .office-living-section .section-description,
-  .gift-section .section-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    padding: 0 1rem;
-    margin-bottom: 1.5rem;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-
-  .sofa-section .section-title br,
-  .sleep-section .section-title br,
-  .office-living-section .section-title br,
-  .gift-section .section-title br,
-  .sofa-section .section-description br,
-  .sleep-section .section-description br,
-  .office-living-section .section-description br,
-  .gift-section .section-description br {
-    display: none;
-  }
-
-  .sofa-item,
-  .sleep-item,
-  .office-item,
-  .gift-item {
-    padding: 0.9375rem;
-  }
-
-  .sofa-item .product-name,
-  .sleep-item .product-name,
-  .office-item .product-name,
-  .gift-item .product-name {
-    font-size: 14px;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-
-  .sofa-item .product-name .included,
-  .sleep-item .product-name .included,
-  .office-item .product-name .included,
-  .gift-item .product-name .included {
-    font-size: 12px;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-}
-
-@media (max-width: 480px) {
-  .sofa-grid,
-  .sleep-grid,
-  .office-grid,
-  .gift-grid {
-    grid-template-columns: 1fr;
-    gap: 25px;
+  .pockiri-section,
+  .popular-section,
+  .new-section,
+  .bargain-section {
+    padding: 1.5rem 0;
+    border-radius: 8px;
   }
 }
 
@@ -1382,41 +1140,117 @@ section {
 /* カレンダー風カウントダウンのスタイル */
 .calendar-countdown {
   text-align: center;
-  margin: 20px auto;
+  margin: 30px auto;
   max-width: 600px;
+  background: linear-gradient(135deg, #fff0f0 0%, #fff8f8 100%);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(203, 7, 8, 0.15);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(203, 7, 8, 0.2);
+}
+
+.calendar-countdown::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  animation: pulse 3s infinite;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
 }
 
 .calendar-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 15px;
   color: var(--color-primary);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 5px 20px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 20%,
+    rgba(255, 255, 255, 0.8) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.calendar-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(203, 7, 8, 0) 0%,
+    rgba(203, 7, 8, 0.5) 50%,
+    rgba(203, 7, 8, 0) 100%
+  );
 }
 
 .calendar-container {
   display: flex;
   justify-content: center;
   gap: 15px;
+  position: relative;
+  z-index: 1;
 }
 
 .calendar-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .calendar-page {
-  background-color: var(--color-white);
-  border: 2px solid var(--color-primary);
-  border-radius: 8px;
-  width: 60px;
-  height: 70px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+  border: none;
+  border-radius: 12px;
+  width: 80px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), inset 0 -4px 0 rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.calendar-page:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.05);
 }
 
 .calendar-page:before {
@@ -1425,38 +1259,154 @@ section {
   top: 0;
   left: 0;
   right: 0;
-  height: 20px;
-  background-color: var(--color-primary);
+  height: 30px;
+  background: linear-gradient(to right, var(--color-primary), #ff3333);
   z-index: 0;
 }
 
+.calendar-page:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  z-index: 0;
+  opacity: 0.5;
+}
+
 .calendar-page span {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 900;
   color: #333;
   position: relative;
   z-index: 1;
-  margin-top: 10px;
+  margin-top: 15px;
+  text-shadow: 2px 2px 0 rgba(255, 255, 255, 1), -1px -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .calendar-label {
-  margin-top: 5px;
-  font-size: 0.9rem;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 700;
   color: #333;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 3px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 480px) {
+/* 秒の表示を点滅させる */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+#countdown-seconds {
+  animation: blink 1s infinite;
+  color: var(--color-primary);
+}
+
+/* 緊急性を伝えるリボン */
+.calendar-countdown::after {
+  content: "限定セール";
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  background: var(--color-secondary);
+  color: #333;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 5px 40px;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+/* キャンペーン終了メッセージのスタイル */
+.campaign-ended {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #666;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+}
+
+@media (max-width: 768px) {
+  .calendar-countdown {
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .calendar-title {
+    font-size: 1.2rem;
+  }
+
   .calendar-page {
-    width: 50px;
-    height: 60px;
+    width: 65px;
+    height: 75px;
   }
 
   .calendar-page span {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+
+  .calendar-label {
+    font-size: 0.9rem;
+  }
+
+  .calendar-countdown::after {
+    font-size: 0.7rem;
+    top: 15px;
+    right: -35px;
+    padding: 3px 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-countdown {
+    padding: 10px;
+  }
+
+  .calendar-container {
+    gap: 8px;
+  }
+
+  .calendar-page {
+    width: 55px;
+    height: 65px;
+  }
+
+  .calendar-page span {
+    font-size: 1.8rem;
+    margin-top: 12px;
   }
 
   .calendar-label {
     font-size: 0.8rem;
+    margin-top: 5px;
+    padding: 2px 8px;
+  }
+
+  .calendar-countdown::after {
+    font-size: 0.6rem;
+    top: 10px;
+    right: -38px;
+    padding: 2px 30px;
   }
 }
 
@@ -1486,19 +1436,167 @@ section {
   margin-top: 0.3rem;
 }
 
-/* キャンペーン終了メッセージのスタイル */
-.campaign-ended {
-  font-size: 1.5rem;
-  color: #666;
-  text-align: center;
+/* 1000円ポッキリセクション */
+.price-1000 {
+  padding: 2rem 0 5rem;
+  background: var(--color-background);
 }
-.coupon-card {
-  display: block;
-  width: 100%; /* 幅を100%に設定 */
-  max-width: 800px; /* 最大幅を設定 */
+
+.price-1000 .product-grid {
+  max-width: 800px;
   margin: 0 auto;
-  transition: transform 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: #fff; /* 背景色を白に設定 */
+}
+
+.price-1000 .product-card {
+  width: 100%;
+  max-width: 519px;
+  margin: 0 auto;
+}
+
+.price-1000 .product-title {
+  font-size: 1.5rem;
+  color: var(--color-black);
+  margin-bottom: 1rem;
+}
+
+.price-1000 .price-current {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+.price-1000 .product-description {
+  font-size: 1rem;
+  color: var(--color-black);
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .price-1000 .product-title {
+    font-size: 1.25rem;
+  }
+
+  .price-1000 .price-current {
+    font-size: 2rem;
+  }
+
+  .price-1000 .product-description {
+    font-size: 0.9rem;
+  }
+}
+
+.to-top .arrow {
+  color: #666;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 0.8;
+  text-align: center;
+  transform: translateY(-4px);
+}
+
+.to-top:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .to-top {
+    right: 15px;
+    bottom: 85px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .to-top .arrow {
+    font-size: 20px;
+    line-height: 0.8;
+    transform: translateY(-2px);
+  }
+}
+
+/* カテゴリナビ */
+.category-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 15px 0;
+}
+
+.category-list {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category-list::-webkit-scrollbar {
+  display: none;
+}
+
+.category-list li {
+  flex: 0 0 auto;
+}
+
+.category-list a {
+  display: block;
+  padding: 12px 30px;
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  background: var(--color-white);
+  border: 2px solid var(--color-primary);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.category-list a:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .category-nav {
+    padding: 12px 10px;
+  }
+
+  .category-list {
+    gap: 1rem;
+    padding: 0 5px;
+    justify-content: flex-start;
+  }
+
+  .category-list a {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+  }
+
+  /* TOPに戻るボタンの位置調整 */
+  .to-top {
+    bottom: 85px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-list {
+    gap: 1rem;
+  }
+
+  .category-list a {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
 }
