@@ -1,0 +1,1295 @@
+/* 変数定義 */
+:root {
+  /* カラー */
+  --color-primary: #cb0708;
+  --color-secondary: #ffd400;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray: #666666;
+  --color-background: #c90908;
+  --color-kidnapper: #ddebd3;
+
+  /* フォント */
+  --font-family-base: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-size-base: 1rem;
+  --spacing-base: 1rem;
+}
+
+/* リセット */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-base);
+  line-height: 1.6;
+  color: var(--color-black);
+  background: var(--color-kidnapper);
+  font-size: var(--font-size-base);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* レイアウト */
+.container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* セールヘッダー */
+.sale-header {
+  width: 100%;
+  padding: 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 50%, #e6f3ff 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sale-header-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* カテゴリーセクション */
+.category-wrapper {
+  padding: calc(2 * var(--spacing-base)) var(--spacing-base);
+  background-color: var(--color-kidnapper);
+}
+
+.campaign-section {
+  margin-bottom: 2rem;
+}
+
+.campaign-info {
+  margin-top: 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fff 0%, #fff8e1 100%);
+  border-radius: 12px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.category-section {
+  padding: 0;
+  background-color: transparent;
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top;
+  will-change: transform, opacity, padding;
+}
+
+.category-section.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(40, 182, 207, 0.2);
+}
+
+.category-section.sticky .campaign-info {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-section .campaign-info {
+  opacity: 1;
+  max-height: 1000px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top;
+}
+
+.category-section .category-buttons,
+.category-section .category-button,
+.category-section .category-text,
+.category-section .category-icon {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-section.transitioning {
+  transform: scale(0.98);
+  opacity: 0.95;
+}
+
+.category-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.category-button {
+  background: linear-gradient(to right, #28b6cf, #5ad8f0);
+  border-radius: 10px;
+  padding: var(--spacing-base) calc(1.5 * var(--spacing-base));
+  min-width: 15.625rem; /* 250px to rem */
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.category-text {
+  color: var(--color-white);
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  text-align: left;
+  z-index: 1;
+}
+
+.category-icon {
+  width: 1.875rem; /* 30px to rem */
+  height: 1.875rem; /* 30px to rem */
+  object-fit: contain;
+  z-index: 1;
+  margin-left: 0.625rem; /* 10px to rem */
+}
+
+.category-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.campaign-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #cb0708;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.campaign-period {
+  position: relative;
+  text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #28b6cf;
+  margin-top: 2rem;
+}
+
+.campaign-period::before {
+  content: "新生活応援プライス期間";
+  position: absolute;
+  top: -1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #28b6cf;
+  color: #fff;
+  padding: 0.5em 2em;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 100px;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(40, 182, 207, 0.3);
+}
+
+.period-date {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.countdown {
+  margin-top: 1rem;
+}
+
+.countdown-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #28b6cf;
+  margin-bottom: 1rem;
+}
+
+.countdown-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f0f8ff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  min-width: 80px;
+}
+
+.countdown-item span:first-child {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #28b6cf;
+  line-height: 1.2;
+}
+
+.countdown-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 768px) {
+  .category-wrapper {
+    padding: 1rem;
+  }
+
+  .campaign-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .campaign-info {
+    padding: 1rem;
+  }
+
+  .campaign-title {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    padding: 0 0.5rem;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .campaign-period {
+    padding: 1.2rem 1rem;
+    margin-top: 1.8rem;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .category-section.sticky {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(40, 182, 207, 0.2);
+    border-bottom: none;
+  }
+
+  .category-section.sticky .category-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+    padding: 0 0.5rem;
+  }
+
+  .category-section.sticky .category-row {
+    display: contents;
+  }
+
+  .category-section.sticky .category-button {
+    width: 100%;
+    min-width: 0;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    white-space: normal;
+    flex: 1 1 auto;
+    background: rgba(40, 182, 207, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    justify-content: center;
+    height: auto;
+  }
+
+  .category-section.sticky .category-text {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .category-section.sticky .category-text br {
+    display: none;
+  }
+
+  .category-section.sticky .category-icon {
+    display: none;
+  }
+
+  /* フッターとの干渉を防ぐためのスペース確保 */
+  .site-footer {
+    margin-bottom: 180px;
+  }
+
+  /* スクロールインジケータを削除 */
+  .category-section.sticky::after {
+    display: none;
+  }
+
+  .category-buttons {
+    gap: 0.5rem;
+  }
+
+  .category-row {
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .category-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    white-space: normal;
+    background: linear-gradient(to right, #28b6cf, #5ad8f0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-text {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+  }
+
+  .campaign-title {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    padding: 0 0.5rem;
+  }
+
+  .campaign-period {
+    padding: 1.2rem 1rem;
+    margin-top: 1.8rem;
+  }
+
+  .campaign-period::before {
+    font-size: 1rem;
+    padding: 0.4em 1.5em;
+    top: -1rem;
+  }
+
+  .period-date {
+    font-size: 1.4rem;
+  }
+
+  .countdown-item {
+    min-width: 60px;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .countdown-item span:first-child {
+    font-size: 1.6rem;
+  }
+
+  .countdown-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .section-title,
+  .sofa-section .section-title,
+  .sleep-section .section-title,
+  .office-living-section .section-title,
+  .gift-section .section-title {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    padding: 0.7rem !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .section-description,
+  .sofa-section .section-description,
+  .sleep-section .section-description,
+  .office-living-section .section-description,
+  .gift-section .section-description {
+    font-size: 0.8rem !important;
+    line-height: 1.5 !important;
+    padding: 0 0.5rem !important;
+  }
+
+  .campaign-title {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    padding: 0 0.5rem !important;
+    letter-spacing: -0.02em !important;
+  }
+}
+
+/* セクション */
+section {
+  padding: 0;
+  background: var(--color-kidnapper);
+  margin-bottom: 60px;
+}
+
+.section-title {
+  color: var(--color-white);
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 3rem 0 2rem;
+  background: #28b6cf;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.section-divider {
+  width: 660px;
+  height: 37px;
+  margin: 0 auto 2rem;
+  display: none;
+}
+
+/* 商品グリッド */
+.product-grid {
+  display: flex;
+  justify-content: center;
+  gap: 89px;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+/* 商品カード */
+.product-card {
+  background: #fff5f7; /* さらに薄い桃色 */
+  border-radius: 20px;
+  width: 519px;
+  position: relative;
+  padding-bottom: 100px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.product-link {
+  display: block;
+  padding: 2rem 2rem 0;
+}
+
+.product-image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: var(--color-white);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-info {
+  padding: 2rem;
+  text-align: center;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.product-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+}
+
+.price-original {
+  color: var(--color-black);
+  text-decoration: line-through;
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.discount-badge {
+  color: #ff0000;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 32px;
+  margin: 0.25rem 0;
+}
+
+.price-current {
+  color: #ff0000;
+  font-weight: 800;
+  font-size: 3rem;
+}
+
+/* 商品ページボタン */
+.product-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 216px;
+  height: 64px;
+  background: url(https://www.rakuten.ne.jp/gold/mogustore/SS/202503/statics/product-button.png)
+    no-repeat center;
+  background-size: contain;
+  display: block;
+  font-size: 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.product-button:hover {
+  transform: translateX(-50%) scale(1.05);
+  filter: brightness(1.1);
+}
+
+.product-button:active {
+  transform: translateX(-50%) scale(0.98);
+  filter: brightness(0.95);
+}
+
+/* ボタンの光るエフェクト */
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.product-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shine 2s infinite;
+  pointer-events: none;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1200px) {
+  .product-grid {
+    gap: 2rem;
+  }
+
+  .product-card {
+    width: calc(100% - 2rem);
+    max-width: 519px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.1rem;
+    padding: 0.8rem 1rem;
+    margin: 1.5rem 0 1rem;
+    line-height: 1.4;
+  }
+
+  .section-title::after {
+    bottom: -15px;
+    height: 15px;
+  }
+
+  .product-card {
+    padding-bottom: 90px;
+  }
+
+  .product-link {
+    padding: 1rem 1rem 0;
+  }
+
+  .product-info {
+    padding: 1rem;
+  }
+
+  .price-current {
+    font-size: 2.5rem;
+  }
+
+  .discount-badge {
+    left: 1rem;
+    top: auto;
+    bottom: 5rem;
+    font-size: 24px;
+  }
+
+  .product-button {
+    bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-title {
+    font-size: 1.1rem;
+  }
+
+  .price-original {
+    font-size: 1rem;
+  }
+
+  .price-current {
+    font-size: 2.25rem;
+  }
+
+  .discount-badge {
+    font-size: 22px;
+  }
+}
+
+/* 1000円ポッキリセクション */
+.price-1000 {
+  padding: 2rem 0 5rem;
+  background: var(--color-background);
+}
+
+.price-1000 .product-grid {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.price-1000 .product-card {
+  width: 100%;
+  max-width: 519px;
+  margin: 0 auto;
+}
+
+.price-1000 .product-title {
+  font-size: 1.5rem;
+  color: var(--color-black);
+  margin-bottom: 1rem;
+}
+
+.price-1000 .price-current {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+.price-1000 .product-description {
+  font-size: 1rem;
+  color: var(--color-black);
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .price-1000 .product-title {
+    font-size: 1.25rem;
+  }
+
+  .price-1000 .price-current {
+    font-size: 2rem;
+  }
+
+  .price-1000 .product-description {
+    font-size: 0.9rem;
+  }
+}
+
+.to-top .arrow {
+  color: #666;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 0.8;
+  text-align: center;
+  transform: translateY(-4px);
+}
+
+.to-top:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .to-top {
+    right: 15px;
+    bottom: 85px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .to-top .arrow {
+    font-size: 20px;
+    line-height: 0.8;
+    transform: translateY(-2px);
+  }
+}
+
+/* カテゴリナビ */
+.category-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 15px 0;
+}
+
+.category-list {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category-list::-webkit-scrollbar {
+  display: none;
+}
+
+.category-list li {
+  flex: 0 0 auto;
+}
+
+.category-list a {
+  display: block;
+  padding: 12px 30px;
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  background: var(--color-white);
+  border: 2px solid var(--color-primary);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.category-list a:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .category-nav {
+    padding: 12px 10px;
+  }
+
+  .category-list {
+    gap: 1rem;
+    padding: 0 5px;
+    justify-content: flex-start;
+  }
+
+  .category-list a {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+  }
+
+  /* TOPに戻るボタンの位置調整 */
+  .to-top {
+    bottom: 85px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-list {
+    gap: 1rem;
+  }
+
+  .category-list a {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* 商品セクション共通スタイル */
+.sofa-section,
+.sleep-section,
+.office-living-section,
+.gift-section {
+  padding: 2.5rem 1.25rem;
+  background: linear-gradient(135deg, #f0f8ff 25%, transparent 25%) -3.125rem 0,
+    linear-gradient(225deg, #f0f8ff 25%, transparent 25%),
+    linear-gradient(315deg, #f0f8ff 25%, transparent 25%),
+    linear-gradient(45deg, #f0f8ff 25%, transparent 25%);
+  background-size: 6.25rem 6.25rem;
+  background-color: #e6f7ff;
+  box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.sofa-section .section-title,
+.sleep-section .section-title,
+.office-living-section .section-title,
+.gift-section .section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: #333;
+  background: linear-gradient(to right, #28b6cf, #5ad8f0);
+  padding: 0.9375rem;
+  border-radius: 0.5rem;
+}
+
+.sofa-section .section-description,
+.sleep-section .section-description,
+.office-living-section .section-description,
+.gift-section .section-description {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+  color: #666;
+}
+
+.sofa-grid,
+.sleep-grid,
+.office-grid,
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.sofa-item,
+.sleep-item,
+.office-item,
+.gift-item {
+  text-align: center;
+  transition: all 0.3s ease;
+  background: #fff5f7;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
+}
+
+.sofa-item:hover,
+.sleep-item:hover,
+.office-item:hover,
+.gift-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.sofa-item a,
+.sleep-item a,
+.office-item a,
+.gift-item a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.sofa-item img,
+.sleep-item img,
+.office-item img,
+.gift-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.sofa-item:hover img,
+.sleep-item:hover img,
+.office-item:hover img,
+.gift-item:hover img {
+  transform: scale(1.02);
+}
+
+.sofa-item .product-name,
+.sleep-item .product-name,
+.office-item .product-name,
+.gift-item .product-name {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  padding: 0 10px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sofa-item .product-name .included,
+.sleep-item .product-name .included,
+.office-item .product-name .included,
+.gift-item .product-name .included {
+  font-size: 14px;
+  color: #666;
+  font-weight: normal;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+  .sofa-grid,
+  .sleep-grid,
+  .office-grid,
+  .gift-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sofa-grid,
+  .sleep-grid,
+  .office-grid,
+  .gift-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    padding: 0 0.625rem;
+  }
+
+  .sofa-section .section-title,
+  .sleep-section .section-title,
+  .office-living-section .section-title,
+  .gift-section .section-title {
+    font-size: 1.1rem;
+    padding: 0.8rem 1rem;
+    margin: 1.5rem 0 1rem;
+    line-height: 1.4;
+    display: inline-block;
+    width: 100%;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .sofa-section .section-description,
+  .sleep-section .section-description,
+  .office-living-section .section-description,
+  .gift-section .section-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .sofa-section .section-title br,
+  .sleep-section .section-title br,
+  .office-living-section .section-title br,
+  .gift-section .section-title br,
+  .sofa-section .section-description br,
+  .sleep-section .section-description br,
+  .office-living-section .section-description br,
+  .gift-section .section-description br {
+    display: none;
+  }
+
+  .sofa-item,
+  .sleep-item,
+  .office-item,
+  .gift-item {
+    padding: 0.9375rem;
+  }
+
+  .sofa-item .product-name,
+  .sleep-item .product-name,
+  .office-item .product-name,
+  .gift-item .product-name {
+    font-size: 14px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .sofa-item .product-name .included,
+  .sleep-item .product-name .included,
+  .office-item .product-name .included,
+  .gift-item .product-name .included {
+    font-size: 12px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .sofa-grid,
+  .sleep-grid,
+  .office-grid,
+  .gift-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+
+/* フッターのスタイル */
+.site-footer {
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 85%, #f8f8f8 100%);
+  padding: 3.75rem 0 0;
+  border-top: 0.0625rem solid #eee;
+}
+
+.footer-content {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  position: relative;
+}
+
+.footer-search {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.search-box {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border: 0.0625rem solid #ddd;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.search-button {
+  padding: 1rem 3rem;
+  background: #28b6cf;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background: #1a9bb3;
+}
+
+@media screen and (max-width: 768px) {
+  .search-box {
+    flex-direction: column;
+    gap: 0.9375rem;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .mogu-logo {
+    height: 4rem; /* モバイル時は64px相当 */
+  }
+
+  .search-input {
+    padding: 0.875rem 1.125rem;
+    font-size: 1rem;
+  }
+
+  .search-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+.footer-logo-button-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+}
+
+.footer-logo {
+  margin: 0;
+}
+
+.mogu-logo {
+  height: 7.5rem; /* 120px相当 */
+  width: auto;
+}
+
+.footer-top-button {
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  background: #ffb366;
+  color: #444;
+  text-decoration: none;
+  border-radius: 2rem;
+  font-weight: bold;
+  transition: all 0.3s;
+  margin: 0;
+}
+
+.footer-top-button:hover {
+  background: #ffd5a1;
+  transform: translateY(-0.1875rem);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+.footer-top-button:active {
+  transform: translateY(-0.0625rem);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+.footer-nav {
+  width: 100%;
+  padding: 2rem 0;
+  border-top: 0.0625rem solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-logo {
+  margin: 0;
+  text-align: center;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.footer-links a {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #28b6cf;
+}
+
+@media screen and (max-width: 768px) {
+  .site-footer {
+    padding: 2.5rem 0 0;
+  }
+
+  .footer-content {
+    gap: 1.875rem;
+  }
+
+  .footer-logo-button-wrapper {
+    gap: 1.25rem;
+  }
+
+  .mogu-logo {
+    height: 6rem; /* モバイル時は96px相当 */
+  }
+
+  .search-box {
+    flex-direction: column;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+
+  .footer-links {
+    width: 100%;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-top-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer-top-button {
+    padding: 0.625rem 1.25rem;
+    border-radius: 1.5rem;
+  }
+
+  .footer-nav {
+    padding: 1.5rem 0;
+    gap: 1.5rem;
+  }
+
+  .mogu-logo {
+    height: 5rem; /* 小さい画面では80px相当 */
+  }
+
+  .footer-links {
+    gap: 1.5rem;
+  }
+}
