@@ -191,18 +191,18 @@
               />
             </div>
             <div class="social-links">
-              <a href="#" class="social-icon twitter">
+              <span class="social-icon twitter">
                 <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#" class="social-icon facebook">
+              </span>
+              <span class="social-icon facebook">
                 <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="social-icon instagram">
+              </span>
+              <span class="social-icon instagram">
                 <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#" class="social-icon line">
+              </span>
+              <span class="social-icon line">
                 <i class="fab fa-line"></i>
-              </a>
+              </span>
             </div>
             <ul class="footer-links">
               <li><a href="https://www.rakuten.co.jp/mogustore/">TOP</a></li>
@@ -482,6 +482,42 @@
         });
       }
 
+      // スクロール方向に応じたナビゲーション表示/非表示
+      function setupScrollDirection() {
+        const body = document.body;
+        let lastScrollTop = 0;
+        const scrollThreshold = 5; // スクロールを検知する最小ピクセル数
+
+        window.addEventListener(
+          "scroll",
+          () => {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (Math.abs(lastScrollTop - st) <= scrollThreshold) return;
+
+            if (st > lastScrollTop && st > 100) {
+              // 下にスクロール
+              body.classList.add("scroll-down");
+              body.classList.remove("scroll-up");
+            } else if (st < lastScrollTop) {
+              // 上にスクロール
+              body.classList.add("scroll-up");
+              body.classList.remove("scroll-down");
+            }
+
+            lastScrollTop = st <= 0 ? 0 : st;
+          },
+          { passive: true }
+        );
+      }
+
+      // タッチデバイス検出
+      function setupTouchDevice() {
+        if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+          document.body.classList.add("touch-device");
+        }
+      }
+
       // ページ読み込み時の処理
       document.addEventListener("DOMContentLoaded", async () => {
         // 商品データを読み込んで表示
@@ -496,6 +532,12 @@
 
         // カテゴリーセクションの固定表示設定
         setupCategorySticky();
+
+        // スクロール方向の検出
+        setupScrollDirection();
+
+        // タッチデバイス検出
+        setupTouchDevice();
       });
     </script>
   </body>
