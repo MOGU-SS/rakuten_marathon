@@ -82,11 +82,76 @@ a {
   margin: 2rem auto;
   max-width: 800px;
   text-align: center;
+  position: relative;
+}
+
+.coupon-logo-container {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
 }
 
 .coupon-logo {
   max-width: 300px;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto;
+  animation: float 3s ease-in-out infinite, appear 1.2s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+/* ロゴの浮かび上がるアニメーション */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 5px 15px rgba(203, 7, 8, 0.2));
+  }
+  50% {
+    transform: translateY(-10px);
+    filter: drop-shadow(0 15px 20px rgba(203, 7, 8, 0.3));
+  }
+}
+
+/* ロゴのフェードインアニメーション */
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ロゴの背後に光るエフェクト */
+.coupon-logo-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 100px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 212, 0, 0.3) 0%,
+    rgba(255, 212, 0, 0) 70%
+  );
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 }
 
 .coupon-card {
@@ -94,15 +159,58 @@ a {
   width: 100%; /* 幅を100%に設定 */
   max-width: 800px; /* 最大幅を設定 */
   margin: 0 auto;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: #fff; /* 背景色を白に設定 */
+  animation: cardAppear 0.8s ease-out 0.5s backwards;
+  position: relative;
+}
+
+/* クーポンカードのフェードインアニメーション */
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .coupon-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(203, 7, 8, 0.15);
+}
+
+/* クーポンカードの光るエフェクト */
+.coupon-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 3s infinite 1s;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  20%,
+  100% {
+    left: 150%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -686,8 +794,8 @@ section {
   filter: brightness(0.95);
 }
 
-/* ボタンの光るエフェクト */
-@keyframes shine {
+/* 商品ボタンの光るエフェクト */
+@keyframes buttonShine {
   0% {
     background-position: -100% 0;
   }
@@ -710,7 +818,7 @@ section {
     rgba(255, 255, 255, 0) 100%
   );
   background-size: 200% 100%;
-  animation: shine 2s infinite;
+  animation: buttonShine 2s infinite;
   pointer-events: none;
 }
 
@@ -1319,7 +1427,7 @@ section {
 
 /* 緊急性を伝えるリボン */
 .calendar-countdown::after {
-  content: "限定セール";
+  content: "期間限定";
   position: absolute;
   top: 20px;
   right: -30px;
