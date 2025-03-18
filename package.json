@@ -11,5 +11,8 @@
   "description": "",
   "dependencies": {
     "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "html-minifier-terser": "^7.2.0"
   }
 }
