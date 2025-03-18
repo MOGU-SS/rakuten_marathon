@@ -2195,3 +2195,9 @@ section {
     display: inline; /* 改行を表示 */
   }
 }
+
+@media (max-width: 768px) {
+  .product-price .price-range {
+    font-size: 2rem !important;
+  }
+}
